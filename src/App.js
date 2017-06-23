@@ -1,6 +1,6 @@
 /* @flow */
 import React, { Component } from "react";
-import { get } from "./components/fetch";
+import get from "./components/fetch";
 import { Container, Heading } from "./components/Styled";
 
 class App extends Component {
