@@ -1,6 +1,6 @@
 /* @flow */
 import React, { Component } from "react";
-import get, { createUrl } from "./components/fetch";
+import { get } from "./components/fetch";
 import { Container, Heading } from "./components/Styled";
 
 class App extends Component {
@@ -16,8 +16,7 @@ class App extends Component {
       "RobotCaleb",
       "noobs2ninjas"
     ],
-    streams: [],
-    users_info: []
+    streams: []
   };
 
   showAll = () => {
@@ -40,21 +39,21 @@ class App extends Component {
 
   componentDidMount() {
     this.state.users.forEach((user, i) =>
-      get(`/streams/${user}`).then(stream =>
-        this.setState({
-          streams: [
-            ...this.state.streams,
-            {
-              user,
-              stream: stream.stream
-            }
-          ]
-        })
+      get(`/user/${user}`).then(user_info =>
+        get(`/streams/${user}`).then(stream =>
+          this.setState({
+            streams: [
+              ...this.state.streams,
+              {
+                user,
+                user_info,
+                stream: stream.stream
+              }
+            ]
+          })
+        )
       )
     );
-    get(
-      createUrl("/users", { login: this.state.users.join(",") })
-    ).then(users => this.setState({ users_info: users.users }));
   }
 
   render() {
