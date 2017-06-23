@@ -1,10 +1,11 @@
 /* @flow */
 import React, { Component } from "react";
-import { get } from "./components/fetch";
+import get, { createUrl } from "./components/fetch";
 import { Container, Heading } from "./components/Styled";
 
 class App extends Component {
   state = {
+    show: "all",
     users: [
       "ESL_SC2",
       "OgamingSC2",
@@ -15,7 +16,26 @@ class App extends Component {
       "RobotCaleb",
       "noobs2ninjas"
     ],
-    streams: []
+    streams: [],
+    users_info: []
+  };
+
+  showAll = () => {
+    this.setState({
+      show: "all"
+    });
+  };
+
+  showOnline = () => {
+    this.setState({
+      show: "online"
+    });
+  };
+
+  showOffline = () => {
+    this.setState({
+      show: "offline"
+    });
   };
 
   componentDidMount() {
@@ -32,18 +52,53 @@ class App extends Component {
         })
       )
     );
+    get(
+      createUrl("/users", { login: this.state.users.join(",") })
+    ).then(users => this.setState({ users_info: users.users }));
   }
 
   render() {
+    let shownStreams;
+
+    switch (this.state.show) {
+      case "online":
+        shownStreams = this.state.streams.filter(
+          stream => stream.stream !== null
+        );
+        break;
+      case "offline":
+        shownStreams = this.state.streams.filter(
+          stream => stream.stream === null
+        );
+        break;
+      default:
+        shownStreams = this.state.streams;
+        break;
+    }
+
     return (
       <Container>
         <Heading>
           FCC Twitch API wireframe
         </Heading>
-        {this.state.streams.map(twitch => {
+        <div>
+          <div onClick={this.showAll}>
+            Show All
+          </div>
+          <div onClick={this.showOnline}>
+            Show Online
+          </div>
+          <div onClick={this.showOffline}>
+            Show Offline
+          </div>
+        </div>
+        <br />
+        <br />
+        {shownStreams.map(twitch => {
+          const lowkey_user = twitch.user.toLowerCase();
           return (
-            <div>
-              <a href={`https://www.twitch.tv/${twitch.user.toLowerCase()}`}>
+            <div key={lowkey_user}>
+              <a href={`https://www.twitch.tv/${lowkey_user}`}>
                 {twitch.user}
               </a>
               <br />
