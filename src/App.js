@@ -1,10 +1,20 @@
 /* @flow */
 import React, { Component } from "react";
 import get from "./components/fetch";
-import { Container, Heading } from "./components/Styled";
+import {
+  Container,
+  Heading,
+  Sidebar,
+  Content,
+  Button,
+  ButtonContainer,
+  UserContainer
+} from "./components/Styled";
+import UserRow from "./components/UserRow";
 
 class App extends Component {
   state = {
+    show: "all",
     users: [
       "ESL_SC2",
       "OgamingSC2",
@@ -21,18 +31,21 @@ class App extends Component {
 
   showAll = () => {
     this.setState({
+      show: "all",
       shownStreams: this.state.streams
     });
   };
 
   showOnline = () => {
     this.setState({
+      show: "online",
       shownStreams: this.state.streams.filter(stream => stream.stream !== null)
     });
   };
 
   showOffline = () => {
     this.setState({
+      show: "offline",
       shownStreams: this.state.streams.filter(stream => stream.stream === null)
     });
   };
@@ -67,37 +80,39 @@ class App extends Component {
   render() {
     return (
       <Container>
-        <Heading>
-          FCC Twitch API wireframe
-        </Heading>
-        <div>
-          <div onClick={this.showAll}>
-            Show All
-          </div>
-          <div onClick={this.showOnline}>
-            Show Online
-          </div>
-          <div onClick={this.showOffline}>
-            Show Offline
-          </div>
-        </div>
-        <br />
-        <br />
-        {this.state.shownStreams.map(twitch => {
-          const lowkey_user = twitch.user.toLowerCase();
-          return (
-            <div key={lowkey_user}>
-              <a href={`https://www.twitch.tv/${lowkey_user}`}>
-                {twitch.user}
-              </a>
-              <br />
-              {twitch.stream === null
-                ? "Offline"
-                : `${twitch.stream.channel.game}: ${twitch.stream.channel
-                    .status}`}
-            </div>
-          );
-        })}
+        <Sidebar>
+          <Heading>
+            FCC Twitch API
+          </Heading>
+          <ButtonContainer>
+            <Button onClick={this.showAll} isActive={this.state.show === "all"}>
+              All Streamers
+            </Button>
+            <Button
+              onClick={this.showOnline}
+              isActive={this.state.show === "online"}
+            >
+              Online
+            </Button>
+            <Button
+              onClick={this.showOffline}
+              isActive={this.state.show === "offline"}
+            >
+              Offline
+            </Button>
+          </ButtonContainer>
+        </Sidebar>
+        <Content>
+          <UserContainer>
+            {this.state.shownStreams.map(twitch =>
+              <UserRow
+                key={twitch.user.toLowerCase()}
+                user={twitch.user}
+                stream={twitch.stream}
+              />
+            )}
+          </UserContainer>
+        </Content>
       </Container>
     );
   }

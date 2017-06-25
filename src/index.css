@@ -126,13 +126,15 @@ table {
   box-sizing: border-box;
 }
 
-html {
-  font-size: 62.5%;
+html, #root {
   min-height: 100vh;
+  height: 100%;
+  background-color: #121313;
 }
 
 body {
-  font-size: 10px;
+  min-height: 100vh;
+  height: 100%;
+  font-size: 12px;
   font-family: 'Josefin Sans', sans-serif;
-  min-height: 100%;
 }
