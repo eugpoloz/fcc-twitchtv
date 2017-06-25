@@ -5,7 +5,6 @@ import { Container, Heading } from "./components/Styled";
 
 class App extends Component {
   state = {
-    show: "all",
     users: [
       "ESL_SC2",
       "OgamingSC2",
@@ -16,34 +15,43 @@ class App extends Component {
       "RobotCaleb",
       "noobs2ninjas"
     ],
-    streams: []
+    streams: [],
+    shownStreams: []
   };
 
   showAll = () => {
     this.setState({
-      show: "all"
+      shownStreams: this.state.streams
     });
   };
 
   showOnline = () => {
     this.setState({
-      show: "online"
+      shownStreams: this.state.streams.filter(stream => stream.stream !== null)
     });
   };
 
   showOffline = () => {
     this.setState({
-      show: "offline"
+      shownStreams: this.state.streams.filter(stream => stream.stream === null)
     });
   };
 
   componentDidMount() {
     this.state.users.forEach((user, i) =>
-      get(`/user/${user}`).then(user_info =>
+      get(`/users/${user}`).then(user_info =>
         get(`/streams/${user}`).then(stream =>
           this.setState({
             streams: [
               ...this.state.streams,
+              {
+                user,
+                user_info,
+                stream: stream.stream
+              }
+            ],
+            shownStreams: [
+              ...this.state.shownStreams,
               {
                 user,
                 user_info,
@@ -57,24 +65,6 @@ class App extends Component {
   }
 
   render() {
-    let shownStreams;
-
-    switch (this.state.show) {
-      case "online":
-        shownStreams = this.state.streams.filter(
-          stream => stream.stream !== null
-        );
-        break;
-      case "offline":
-        shownStreams = this.state.streams.filter(
-          stream => stream.stream === null
-        );
-        break;
-      default:
-        shownStreams = this.state.streams;
-        break;
-    }
-
     return (
       <Container>
         <Heading>
@@ -93,7 +83,7 @@ class App extends Component {
         </div>
         <br />
         <br />
-        {shownStreams.map(twitch => {
+        {this.state.shownStreams.map(twitch => {
           const lowkey_user = twitch.user.toLowerCase();
           return (
             <div key={lowkey_user}>
