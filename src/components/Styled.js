@@ -1,4 +1,3 @@
-/* @flow */
 import styled, { css } from "styled-components";
 
 export const Container = styled.section`
@@ -51,14 +50,14 @@ export const Button = styled.div`
   text-align: center;
   color: rgb(208, 185, 80);
   cursor: pointer;
-  transition: all .3s ease;
+  transition: all 0.3s ease;
 
   ${props =>
     props.isActive &&
     css`
-    color: #fff;
-    background-color: rgb(158,129,48);
-  `}
+      color: #fff;
+      background-color: rgb(158, 129, 48);
+    `};
 `;
 
 export const UserContainer = styled(ButtonContainer)`
@@ -67,21 +66,4 @@ export const UserContainer = styled(ButtonContainer)`
   align-items: stretch;
   width: 100%;
   margin-top: 84px;
-`;
-
-export const UserRowView = styled(ButtonContainer)`
-  justify-content: flex-start;
-  align-content: flex-start;
-  flex: 0 1 100%;
-  padding: 10px 15px;
-  font-size: 16px;
-  background-color: gray;
-
-  :not(:first-of-type) {
-    margin-top: 8px;
-  }
-
-  :not(:last-of-type) {
-    margin-bottom: 8px;
-  }
 `;

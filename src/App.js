@@ -78,39 +78,36 @@ class App extends Component {
   }
 
   render() {
+    const { show, shownStreams } = this.state;
+
     return (
       <Container>
         <Sidebar>
-          <Heading>
-            FCC Twitch API
-          </Heading>
+          <Heading>FCC Twitch API</Heading>
           <ButtonContainer>
-            <Button onClick={this.showAll} isActive={this.state.show === "all"}>
+            <Button onClick={this.showAll} isActive={show === "all"}>
               All Streamers
             </Button>
-            <Button
-              onClick={this.showOnline}
-              isActive={this.state.show === "online"}
-            >
+            <Button onClick={this.showOnline} isActive={show === "online"}>
               Online
             </Button>
-            <Button
-              onClick={this.showOffline}
-              isActive={this.state.show === "offline"}
-            >
+            <Button onClick={this.showOffline} isActive={show === "offline"}>
               Offline
             </Button>
           </ButtonContainer>
         </Sidebar>
         <Content>
           <UserContainer>
-            {this.state.shownStreams.map(twitch =>
-              <UserRow
-                key={twitch.user.toLowerCase()}
-                user={twitch.user}
-                stream={twitch.stream}
-              />
-            )}
+            {shownStreams.map(twitch => {
+              const { user_info } = twitch;
+              return (
+                <UserRow
+                  key={user_info.name}
+                  user={user_info}
+                  stream={twitch.stream}
+                />
+              );
+            })}
           </UserContainer>
         </Content>
       </Container>
