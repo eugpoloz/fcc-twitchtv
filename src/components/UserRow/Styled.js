@@ -9,16 +9,16 @@ const Container = styled(ButtonContainer)`
   flex-grow: 0;
   flex-shrink: 1;
   flex-basis: 100%;
-  padding: 10px 15px;
+  padding: 9px 12px;
   font-size: 16px;
   background-color: rgba(255,255,255,.15);
 
   :not(:first-of-type) {
-    margin-top: 8px;
+    margin-top: 6px;
   }
 
   :not(:last-of-type) {
-    margin-bottom: 8px;
+    margin-bottom: 6px;
   }
 `;
 
@@ -71,6 +71,13 @@ const Status = styled.div`
     opacity: 1;
     font-style: normal;
   `}
-`
+`;
 
-export { Container, Icon, IconImg, Info, Link, Status };
+export {
+  Container,
+  Icon,
+  IconImg,
+  Info,
+  Link,
+  Status
+};
