@@ -97,12 +97,13 @@ class App extends Component {
         </Sidebar>
         <Content>
           {shownStreams.map(twitch => {
-            const { user_info } = twitch;
+            const { user_info, stream } = twitch;
+            
             return (
               <UserRow
                 key={user_info.name}
                 user={user_info}
-                stream={twitch.stream}
+                stream={stream}
               />
             );
           })}
