@@ -8,10 +8,12 @@ const Container = styled(ButtonContainer)`
   align-content: flex-start;
   flex-grow: 0;
   flex-shrink: 1;
-  flex-basis: 100%;
+  flex-basis: auto;
+  width: 100%;
   padding: 9px 12px;
   font-size: 16px;
   background-color: rgba(255,255,255,.15);
+  will-change: max-height;
 
   :not(:first-of-type) {
     margin-top: 6px;

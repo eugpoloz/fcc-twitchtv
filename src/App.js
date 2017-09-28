@@ -3,7 +3,12 @@
 // - mobile styles
 
 import React, { Component } from "react";
+import TransitionGroup from 'react-transition-group/TransitionGroup';
+
 import get from "./components/fetch";
+import UserRow from "./components/UserRow";
+import Spinner from "./components/Spinner";
+
 import {
   Container,
   Heading,
@@ -12,8 +17,6 @@ import {
   Button,
   ButtonContainer
 } from "./components/Styled";
-import UserRow from "./components/UserRow";
-import Spinner from "./components/Spinner";
 
 class App extends Component {
   state = {
@@ -34,6 +37,21 @@ class App extends Component {
   };
 
   showAll = () => {
+    // if we already have some shownStreams in state,
+    // we should add unshown streams from this.state.streams
+    if (this.state.shownStreams.length > 0) {
+      this.setState({
+        show: "all",
+        shownStreams: [
+          ...this.state.shownStreams,
+          ...this.state.streams.filter(stream => !this.state.shownStreams.find(existingStreams => stream.user === existingStreams.user))
+        ]
+      });
+      return;  
+    }
+
+    // ... if we don't,
+    // we just show all streams in this.state.streams
     this.setState({
       show: "all",
       shownStreams: this.state.streams
@@ -104,17 +122,19 @@ class App extends Component {
         </Sidebar>
         <Content>
           {shownStreams.length > 0
-            ? shownStreams.map(twitch => {
-                const { user_info, stream } = twitch;
+            ? <TransitionGroup style={{ width: "100%" }}>
+                {shownStreams.map(twitch => {
+                  const { user_info, stream } = twitch;
 
-                return (
-                  <UserRow
-                    key={user_info.name}
-                    user={user_info}
-                    stream={stream}
-                  />
-                );
-              })
+                  return (
+                    <UserRow
+                      key={user_info.name}
+                      user={user_info}
+                      stream={stream}
+                    />
+                  );
+                })}
+              </TransitionGroup>
             : <Spinner />
           }
         </Content>
