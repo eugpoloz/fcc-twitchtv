@@ -7,13 +7,13 @@ import {
   Sidebar,
   Content,
   Button,
-  ButtonContainer,
-  UserContainer
+  ButtonContainer
 } from "./components/Styled";
 import UserRow from "./components/UserRow";
 
 class App extends Component {
   state = {
+    loading: true,
     show: "all",
     users: [
       "ESL_SC2",
@@ -97,18 +97,16 @@ class App extends Component {
           </ButtonContainer>
         </Sidebar>
         <Content>
-          <UserContainer>
-            {shownStreams.map(twitch => {
-              const { user_info } = twitch;
-              return (
-                <UserRow
-                  key={user_info.name}
-                  user={user_info}
-                  stream={twitch.stream}
-                />
-              );
-            })}
-          </UserContainer>
+          {shownStreams.map(twitch => {
+            const { user_info } = twitch;
+            return (
+              <UserRow
+                key={user_info.name}
+                user={user_info}
+                stream={twitch.stream}
+              />
+            );
+          })}
         </Content>
       </Container>
     );

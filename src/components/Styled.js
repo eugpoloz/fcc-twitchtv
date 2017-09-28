@@ -1,6 +1,6 @@
 import styled, { css } from "styled-components";
 
-export const Container = styled.section`
+const Container = styled.section`
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
@@ -13,17 +13,25 @@ export const Container = styled.section`
   color: #fff;
 `;
 
-export const Sidebar = styled.article`
+const Sidebar = styled.article`
   flex: 1 1 30%;
   min-width: 300px;
 `;
 
-export const Content = styled.article`
+const Content = styled.article`
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: stretch;
+  align-content: space-around;
+
   flex: 1 1 70%;
+  margin-top: 84px;
   padding-left: 60px;
 `;
 
-export const Heading = styled.h1`
+const Heading = styled.h1`
   margin: 0 0 30px;
   font-weight: 700;
   font-size: 36px;
@@ -31,7 +39,7 @@ export const Heading = styled.h1`
   text-align: center;
 `;
 
-export const ButtonContainer = styled.div`
+const ButtonContainer = styled.div`
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -40,7 +48,7 @@ export const ButtonContainer = styled.div`
   align-content: center;
 `;
 
-export const Button = styled.div`
+const Button = styled.div`
   width: 100%;
   margin: 0 5px;
   padding: 10px 15px;
@@ -60,10 +68,11 @@ export const Button = styled.div`
     `};
 `;
 
-export const UserContainer = styled(ButtonContainer)`
-  justify-content: space-around;
-  align-content: space-around;
-  align-items: stretch;
-  width: 100%;
-  margin-top: 84px;
-`;
+export {
+  Container,
+  Sidebar,
+  Heading,
+  ButtonContainer,
+  Button,
+  Content,
+};
