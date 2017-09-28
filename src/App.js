@@ -1,12 +1,10 @@
-// todo:
-// - mobile styles
-
 import React, { Component } from "react";
 import TransitionGroup from 'react-transition-group/TransitionGroup';
 
 import get from "./components/fetch";
 import UserRow from "./components/UserRow";
 import Spinner from "./components/Spinner";
+import Copyright from "./components/Copyright";
 
 import {
   Container,
@@ -140,6 +138,7 @@ class App extends Component {
             : <Spinner />
           }
         </Content>
+        <Copyright />
       </Container>
     );
   }

@@ -1,11 +1,12 @@
 import React from "react";
 import Transition from 'react-transition-group/Transition';
+
+import Link from "../Link";
 import {
   Container,
   Icon,
   IconImg,
   Info,
-  Link,
   Status
 } from "./Styled";
 

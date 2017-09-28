@@ -11,6 +11,15 @@ const Container = styled.section`
   min-height: 100%;
   padding: 50px;
   color: #fff;
+
+  @media(max-width: 768px) {
+    padding: 30px;
+  }
+
+  @media(max-width: 480px) {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
 `;
 
 const Heading = styled.h1`
@@ -20,6 +29,10 @@ const Heading = styled.h1`
   font-size: 36px;
   line-height: 1.5;
   text-align: center;
+
+  @media(max-width: 768px) {
+    font-size: 30px;
+  }
 `;
 
 const Sidebar = styled.article`
@@ -27,6 +40,12 @@ const Sidebar = styled.article`
   flex-shrink: 0;
   flex-basis: 200px;
   width: 200px;
+
+  @media(max-width: 768px) {
+    flex-basis: 300px;
+    width: 300px;
+    margin: 0 auto 30px;
+  }
 `;
 
 const Content = styled.article`
@@ -44,6 +63,12 @@ const Content = styled.article`
   min-height: 102px;
   padding-left: 64px;
   font-size: 32px;
+
+  @media(max-width: 768px) {
+    flex-basis: 100%;
+    width: 100%;
+    padding-left: 0;
+  }
 `;
 
 const ButtonContainer = styled.div`
@@ -70,9 +95,9 @@ const Button = styled.div`
   ${props =>
     props.isActive &&
     css`
-      color: #fff;
-      background-color: rgb(158, 129, 48);
-    `};
+    color: #fff;
+    background-color: rgb(158, 129, 48);
+  `};
 `;
 
 export {
@@ -81,5 +106,5 @@ export {
   Heading,
   ButtonContainer,
   Button,
-  Content,
+  Content
 };
