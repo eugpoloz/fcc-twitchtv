@@ -15,17 +15,18 @@ import iconPlaceholder from "../../images/icon-placeholder.png";
 const duration = 300;
 
 const defaultStyle = {
-  transition: `all ${duration}ms ease-in-out`,
+  transition: `all ${duration}ms ease-out`,
+  transitionProperty: "transform, max-height, opacity",
   transform: "scale(0)",
   maxHeight: 0,
-  opacity: 0,
+  opacity: 0
 }
 
 const transitionStyles = {
   entered: {
-    opacity: 1,
-    maxHeight: 100,
-    transform: "scale(1)"
+    transform: "scale(1)",
+    maxHeight: 200,
+    opacity: 1
   }
 };
 
@@ -40,6 +41,7 @@ function UserRow(props) {
       timeout={duration}
       mountOnEnter={true}
       unmountOnExit={true}
+      appear={true}
     >
       {(state) => (
         <Container

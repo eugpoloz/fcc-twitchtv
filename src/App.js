@@ -1,5 +1,4 @@
 // todo:
-// - transitions
 // - mobile styles
 
 import React, { Component } from "react";
@@ -20,7 +19,6 @@ import {
 
 class App extends Component {
   state = {
-    loading: true,
     show: "all",
     users: [
       "ESL_SC2",
@@ -59,16 +57,20 @@ class App extends Component {
   };
 
   showOnline = () => {
+    const shownStreams = this.state.streams.filter(stream => stream.stream !== null);
+
     this.setState({
       show: "online",
-      shownStreams: this.state.streams.filter(stream => stream.stream !== null)
+      shownStreams
     });
   };
 
   showOffline = () => {
+    const shownStreams = this.state.streams.filter(stream => stream.stream === null);
+
     this.setState({
       show: "offline",
-      shownStreams: this.state.streams.filter(stream => stream.stream === null)
+      shownStreams
     });
   };
 
