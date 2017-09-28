@@ -4,9 +4,9 @@ const Container = styled.section`
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
-  justify-content: flex-start;
-  align-items: flex-start;
-  align-content: flex-start;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
   width: 100%;
   min-height: 100%;
   padding: 50px;
@@ -27,8 +27,8 @@ const Content = styled.article`
   align-content: space-around;
 
   flex: 1 1 70%;
-  margin-top: 84px;
-  padding-left: 60px;
+  padding-left: 64px;
+  font-size: 32px;
 `;
 
 const Heading = styled.h1`

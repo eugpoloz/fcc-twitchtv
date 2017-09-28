@@ -1,3 +1,7 @@
+// todo:
+// - transitions
+// - mobile styles
+
 import React, { Component } from "react";
 import get from "./components/fetch";
 import {
@@ -9,6 +13,7 @@ import {
   ButtonContainer
 } from "./components/Styled";
 import UserRow from "./components/UserRow";
+import Spinner from "./components/Spinner";
 
 class App extends Component {
   state = {
@@ -96,17 +101,20 @@ class App extends Component {
           </ButtonContainer>
         </Sidebar>
         <Content>
-          {shownStreams.map(twitch => {
-            const { user_info, stream } = twitch;
-            
-            return (
-              <UserRow
-                key={user_info.name}
-                user={user_info}
-                stream={stream}
-              />
-            );
-          })}
+          {shownStreams.length > 0
+            ? shownStreams.map(twitch => {
+                const { user_info, stream } = twitch;
+
+                return (
+                  <UserRow
+                    key={user_info.name}
+                    user={user_info}
+                    stream={stream}
+                  />
+                );
+              })
+            : <Spinner />
+          }
         </Content>
       </Container>
     );
