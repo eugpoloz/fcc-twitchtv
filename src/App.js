@@ -86,8 +86,10 @@ class App extends Component {
 
     return (
       <Container>
+        <Heading>
+          FreeCodeCamp's Twitch API
+        </Heading>
         <Sidebar>
-          <Heading>FCC Twitch API</Heading>
           <ButtonContainer>
             <Button onClick={this.showAll} isActive={show === "all"}>
               All Streamers

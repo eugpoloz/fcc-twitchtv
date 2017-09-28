@@ -3,19 +3,30 @@ import styled, { css } from "styled-components";
 const Container = styled.section`
   display: flex;
   flex-direction: row;
-  flex-wrap: nowrap;
-  justify-content: center;
-  align-items: center;
-  align-content: center;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: flex-start;
+  align-content: flex-start;
   width: 100%;
   min-height: 100%;
   padding: 50px;
   color: #fff;
 `;
 
+const Heading = styled.h1`
+  width: 100%;
+  margin: 0 0 30px;
+  font-weight: 700;
+  font-size: 36px;
+  line-height: 1.5;
+  text-align: center;
+`;
+
 const Sidebar = styled.article`
-  flex: 1 1 30%;
-  min-width: 300px;
+  flex-grow: 0;
+  flex-shrink: 0;
+  flex-basis: 200px;
+  width: 200px;
 `;
 
 const Content = styled.article`
@@ -26,17 +37,13 @@ const Content = styled.article`
   align-items: stretch;
   align-content: space-around;
 
-  flex: 1 1 70%;
+  flex-grow: 1;
+  flex-shrink: 1;
+  flex-basis: calc(100% - 200px);
+
+  min-height: 102px;
   padding-left: 64px;
   font-size: 32px;
-`;
-
-const Heading = styled.h1`
-  margin: 0 0 30px;
-  font-weight: 700;
-  font-size: 36px;
-  line-height: 1.5;
-  text-align: center;
 `;
 
 const ButtonContainer = styled.div`
